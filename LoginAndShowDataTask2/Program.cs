@@ -1,4 +1,4 @@
-
+﻿
 
 
 using System.Data.SqlClient;
@@ -16,33 +16,34 @@ namespace LoginAndShowDataTask2
             try
             {
                 string cmdString = "Create Database HasanTask2";
-                SqlConnection con = new SqlConnection("server=localhost; Initial Catalog=master; Integrated Security=True");
+                string serverName = System.Environment.MachineName; 
+                SqlConnection con = new SqlConnection("server="+serverName+"\\SQLEXPRESS; Initial Catalog=master; Integrated Security=True");
                 SqlCommand cmd = new SqlCommand(cmdString, con);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
 
-                con = new SqlConnection("server=localhost; Initial Catalog=HasanTask2; Integrated Security=True");
-                cmdString = "create table User"
-                            + "(Id int primary key identity,"
-                            + "Username varchar(30),"
-                            + "Password varchar(30))"
-                            + "insert into User values('alica','35688')"
-                            + "create table Student"
-                            + "(Id int primary key identity,"
-                            + "Name varchar(30),"
-                            + "Surname varchar(30))"
-                            + "insert into Student values"
+                con = new SqlConnection("server=" + serverName + "\\SQLEXPRESS;  Initial Catalog=HasanTask2; Integrated Security=True");
+                cmdString = "create table users"
+                            + "(userID int primary key identity,"
+                            + "username varchar(30),"
+                            + "password varchar(30))"
+                            + "insert into users values('alica','35688')"
+                            + "create table students"
+                            + "(userID int primary key identity,"
+                            + "name varchar(30),"
+                            + "surname varchar(30))"
+                            + "insert into students values"
                             + "('Ali','Veli'),"
-                            + "('Mehmet', 'Bra'),"
-                            + "('Ay�e', 'Bra'),"
+                            + "('Mehmet', 'Şimal'),"
+                            + "('Orhan', 'veli')";
                 cmd = new SqlCommand(cmdString, con);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
             }
-            catch(Exception e)
+            catch
             {
 
             }
