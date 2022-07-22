@@ -13,8 +13,8 @@ namespace LoginAndShowDataTask2
 {
     public partial class MainForm : Form
     {
-        private SqlConnection con = new SqlConnection("server = localhost; Initial Catalog=HasanTask2; Integrated Security=True");
-
+        static string serverName = System.Environment.MachineName;
+        private SqlConnection con = new SqlConnection("server = " + serverName + "\\SQLEXPRESS; Initial Catalog=HasanTask2; Integrated Security=True");
         public string Username = "";
         public MainForm()
         {
@@ -29,7 +29,7 @@ namespace LoginAndShowDataTask2
 
         private void ShowDatas()
         {
-            string cmdString = "SELECT * from Student";
+            string cmdString = "SELECT * from students";
             SqlCommand cmd = new SqlCommand(cmdString, con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             con.Open();
